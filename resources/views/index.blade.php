@@ -128,7 +128,7 @@
             <div class="flex flex-col {{ $index > 1 ? 'hidden md:flex' : 'flex' }}">
                 <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-3 group shadow-soft flex items-center justify-center bg-gray-100">
                     @if($item->image_path)
-                        <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                        <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->title }}" class="w-full h-full object-contain group-hover:scale-105 transition duration-500" />
                         <!-- Play icon overlay -->
                         <div class="absolute top-2 left-2 bg-white/80 backdrop-blur-sm w-6 h-6 rounded-full flex items-center justify-center text-[10px] text-gray-700">
                             <i class="fa-solid fa-camera ml-0.5"></i>
@@ -153,33 +153,37 @@
             <div class="w-full md:w-1/2 bg-bg-soft-pink rounded-[2rem] p-8 md:p-10 relative shadow-soft-pink">
                 <h3 class="text-2xl font-serif text-brand-green mb-6 flex items-center gap-2">Contact Us <i class="fa-solid fa-envelope-open-text text-brand-pink text-sm"></i></h3>
                 
-                @if(session('success'))
-                    <div class="bg-brand-green/10 border border-brand-green/20 text-brand-green px-4 py-3 rounded-lg mb-4 text-sm font-medium">
-                        {{ session('success') }}
+                <div class="relative z-10 w-full flex flex-col gap-4 mt-2">
+                    <div class="flex items-start gap-4 bg-white/60 p-4 rounded-xl border border-white/40 shadow-[0_4px_10px_rgba(0,0,0,0.02)]">
+                        <div class="w-10 h-10 rounded-full bg-brand-green text-white flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-map-marker-alt text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 text-sm mb-1">Alamat</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">{!! nl2br(e(\App\Models\Setting::where('key', 'company_address')->value('value') ?? "Jl. Bunga Melati No. 42,\nKebayoran Baru, Jakarta Selatan")) !!}</p>
+                        </div>
                     </div>
-                @endif
-                
-                <form action="{{ route('contact.send') }}" method="POST" class="flex flex-col gap-4 relative z-10 w-full relative">
-                    @csrf
-                    <div>
-                        <input type="text" name="name" value="{{ old('name') }}" required placeholder="Nama Anda" class="w-full px-4 py-3 rounded-lg border-none focus:ring-2 focus:ring-brand-pink transition block bg-white text-sm">
-                    </div>
-                    <div>
-                        <input type="email" name="email" value="{{ old('email') }}" required placeholder="Alamat Email" class="w-full px-4 py-3 rounded-lg border-none focus:ring-2 focus:ring-brand-pink transition block bg-white text-sm">
-                    </div>
-                    <div>
-                        <textarea name="message" required rows="3" placeholder="Pesan Anda..." class="w-full px-4 py-3 rounded-lg border-none focus:ring-2 focus:ring-brand-pink transition block bg-white text-sm">{{ old('message') }}</textarea>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <span class="text-sm font-medium text-gray-700 shrink-0 bg-white px-4 py-3 rounded-lg border-brand-pink border">{{ $num1 }} + {{ $num2 }} =</span>
-                        <input type="number" name="captcha" required placeholder="Hasil hitungan" class="w-full px-4 py-3 rounded-lg border-none focus:ring-2 focus:ring-brand-pink transition block bg-white text-sm">
-                    </div>
-                    @error('captcha')<p class="text-xs text-red-500 font-medium">{{ $message }}</p>@enderror
 
-                    <button type="submit" class="bg-brand-green text-white py-3 rounded-lg font-medium hover:bg-opacity-90 transition mt-2 shadow-sm text-sm">
-                        Kirim Pesan
-                    </button>
-                </form>
+                    <div class="flex items-start gap-4 bg-white/60 p-4 rounded-xl border border-white/40 shadow-[0_4px_10px_rgba(0,0,0,0.02)]">
+                        <div class="w-10 h-10 rounded-full bg-brand-green text-white flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-phone text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 text-sm mb-1">Telepon / WhatsApp</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">+{{ \App\Models\Setting::where('key', 'whatsapp_number')->value('value') ?? '6281234567890' }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 bg-white/60 p-4 rounded-xl border border-white/40 shadow-[0_4px_10px_rgba(0,0,0,0.02)]">
+                        <div class="w-10 h-10 rounded-full bg-brand-green text-white flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-envelope text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 text-sm mb-1">Email</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">halo@faniaflowershop.com</p>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Decorative flower outline -->
                 <img src="https://images.unsplash.com/photo-1597826336103-f661aee093f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="absolute bottom-0 right-0 w-48 opacity-10 mix-blend-multiply filter grayscale rounded-tl-[100px] pointer-events-none z-0" alt="" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" />

@@ -14,8 +14,8 @@
     @if($galleries->count() > 0)
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         @foreach($galleries as $gallery)
-        <div class="h-64 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] cursor-pointer group relative {{ $loop->iteration % 5 == 2 ? 'md:row-span-2 md:h-auto' : '' }}">
-            <img src="{{ Storage::url($gallery->image_path) }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="{{ $gallery->title ?? 'Gallery Image' }}" />
+        <div class="h-64 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] cursor-pointer group relative flex items-center justify-center bg-gray-100 {{ $loop->iteration % 5 == 2 ? 'md:row-span-2 md:h-auto' : '' }}">
+            <img src="{{ Storage::url($gallery->image_path) }}" class="w-full h-full object-contain group-hover:scale-105 transition duration-500" alt="{{ $gallery->title ?? 'Gallery Image' }}" />
             @if($gallery->title)
             <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-5 opacity-0 group-hover:opacity-100 transition duration-300">
                 <p class="text-white font-medium text-sm translate-y-2 group-hover:translate-y-0 transition">{{ $gallery->title }}</p>
