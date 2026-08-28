@@ -7,9 +7,9 @@
     <div class="container mx-auto px-4 flex flex-col md:flex-row items-center relative z-10">
         <!-- Text Content -->
         <div class="w-full md:w-1/2 flex flex-col items-start text-left mb-10 md:mb-0">
-            <h1 class="text-base md:text-lg font-serif text-brand-green mb-2 leading-tight">
+            <h1 class="text-3xl md:text-5xl font-serif text-brand-green mb-4 leading-tight">
                 {{ \App\Models\Setting::where('key', 'hero_title_1')->value('value') ?? 'Kirim Bunga,' }}<br>
-                <span class="text-brand-pink italic">{{ \App\Models\Setting::where('key', 'hero_title_2')->value('value') ?? 'Sampaikan Perasaan' }}</span> <i class="fa-solid fa-seedling text-brand-pink text-base"></i>
+                <span class="text-brand-pink italic">{{ \App\Models\Setting::where('key', 'hero_title_2')->value('value') ?? 'Sampaikan Perasaan' }}</span> <i class="fa-solid fa-seedling text-brand-pink text-2xl md:text-4xl"></i>
             </h1>
             <p class="text-gray-600 text-base md:text-lg mb-8 max-w-sm mt-4">
                 {{ \App\Models\Setting::where('key', 'hero_subtitle')->value('value') ?? 'Buket segar pilihan untuk setiap momen spesial dalam hidup Anda.' }}
