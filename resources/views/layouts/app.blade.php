@@ -103,7 +103,14 @@
       </nav>
 
       <div class="flex items-center gap-4">
-        <div id="google_translate_element" class="hidden md:block"></div>
+        <div class="hidden md:flex items-center gap-2 border rounded-full px-3 py-1 text-sm border-gray-300 cursor-pointer hover:border-gray-400 transition select-none" id="langToggleBtn">
+          <img src="https://flagcdn.com/w20/id.png" alt="Language flag" class="w-4 h-4 rounded-full transition-transform" id="langFlag" />
+          <span id="langDisplayID" class="font-medium text-gray-800 transition-colors">ID</span>
+          <span class="text-gray-300">|</span>
+          <span id="langDisplayEN" class="text-gray-400 hover:text-brand-green transition-colors">EN</span>
+          <i class="fa-solid fa-sync-alt text-xs text-gray-400 hover:rotate-180 transition-transform duration-300"></i>
+        </div>
+        <div id="google_translate_element" style="display: none;"></div>
         <button id="hamburgerBtn" class="md:hidden text-2xl text-gray-700 nav-arrow">
           <i class="fa-solid fa-bars"></i>
         </button>
@@ -155,13 +162,15 @@
         new google.translate.TranslateElement({
           pageLanguage: 'id', 
           includedLanguages: 'en,id',
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          autoDisplay: false
         }, 'google_translate_element');
       }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
+        // Mobile Menu Logic
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const closeMobileMenuBtn = document.getElementById('closeMobileMenu');
         const mobileMenu = document.getElementById('mobileMenu');
@@ -177,8 +186,52 @@
             document.body.style.overflow = '';
           });
         }
+
+        // Custom Language Toggle Logic
+        const langToggleBtn = document.getElementById("langToggleBtn");
+        const langFlag = document.getElementById("langFlag");
+        const langDisplayID = document.getElementById("langDisplayID");
+        const langDisplayEN = document.getElementById("langDisplayEN");
+
+        let currentLang = "id";
+
+        if (langToggleBtn) {
+            langToggleBtn.addEventListener("click", () => {
+                let targetLang = currentLang === "id" ? "en" : "id";
+                
+                // Trigger Google Translate
+                const selectElement = document.querySelector('.goog-te-combo');
+                if (selectElement) {
+                    selectElement.value = targetLang;
+                    selectElement.dispatchEvent(new Event('change'));
+                }
+
+                // Update UI
+                if (targetLang === "en") {
+                    currentLang = "en";
+                    langFlag.src = "https://flagcdn.com/w20/gb.png";
+                    langDisplayID.classList.remove("font-medium", "text-gray-800");
+                    langDisplayID.classList.add("text-gray-400");
+                    langDisplayEN.classList.remove("text-gray-400");
+                    langDisplayEN.classList.add("font-medium", "text-gray-800");
+                } else {
+                    currentLang = "id";
+                    langFlag.src = "https://flagcdn.com/w20/id.png";
+                    langDisplayEN.classList.remove("font-medium", "text-gray-800");
+                    langDisplayEN.classList.add("text-gray-400");
+                    langDisplayID.classList.remove("text-gray-400");
+                    langDisplayID.classList.add("font-medium", "text-gray-800");
+                }
+            });
+        }
       });
     </script>
+    <style>
+      /* Hide Google Translate Top Banner and fix body top spacing */
+      body { top: 0px !important; position: static !important; }
+      .goog-te-banner-frame { display: none !important; }
+      .skiptranslate { display: none !important; }
+    </style>
     @stack('scripts')
 </body>
 </html>
