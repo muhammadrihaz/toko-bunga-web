@@ -26,10 +26,15 @@ class PublicController extends Controller
     public function catalogue(Request $request)
     {
         $categories = Category::all();
+        $flowerTypes = \App\Models\FlowerType::all();
         $query = Product::with('category')->where('is_active', true);
         
         if ($request->filled('category')) {
             $query->where('category_id', $request->category);
+        }
+        
+        if ($request->filled('flower_type')) {
+            $query->where('flower_type_id', $request->flower_type);
         }
         
         if ($request->filled('search')) {
@@ -38,7 +43,7 @@ class PublicController extends Controller
         
         $products = $query->latest()->paginate(12)->withQueryString();
         
-        return view('catalogue', compact('categories', 'products'));
+        return view('catalogue', compact('categories', 'flowerTypes', 'products'));
     }
     
     public function productDetail(Request $request)
