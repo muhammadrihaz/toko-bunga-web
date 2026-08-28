@@ -7,11 +7,11 @@
     <div class="container mx-auto px-4 flex flex-col md:flex-row items-center relative z-10">
         <!-- Text Content -->
         <div class="w-full md:w-1/2 flex flex-col items-start text-left mb-10 md:mb-0">
-            <h1 class="text-4xl md:text-6xl font-serif text-brand-green mb-2 leading-tight">
+            <h1 class="text-base md:text-lg font-serif text-brand-green mb-2 leading-tight">
                 {{ \App\Models\Setting::where('key', 'hero_title_1')->value('value') ?? 'Kirim Bunga,' }}<br>
-                <span class="text-brand-pink italic">{{ \App\Models\Setting::where('key', 'hero_title_2')->value('value') ?? 'Sampaikan Perasaan' }}</span> <i class="fa-solid fa-seedling text-brand-pink text-2xl"></i>
+                <span class="text-brand-pink italic">{{ \App\Models\Setting::where('key', 'hero_title_2')->value('value') ?? 'Sampaikan Perasaan' }}</span> <i class="fa-solid fa-seedling text-brand-pink text-base"></i>
             </h1>
-            <p class="text-gray-600 mb-8 max-w-sm mt-4">
+            <p class="text-gray-600 text-base md:text-lg mb-8 max-w-sm mt-4">
                 {{ \App\Models\Setting::where('key', 'hero_subtitle')->value('value') ?? 'Buket segar pilihan untuk setiap momen spesial dalam hidup Anda.' }}
             </p>
             <a href="{{ url('/catalogue') }}" class="inline-flex items-center gap-2 bg-brand-green text-white px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition shadow-md">
@@ -151,8 +151,7 @@
             
             <!-- Contact Form Card -->
             <div class="w-full md:w-1/2 bg-bg-soft-pink rounded-[2rem] p-8 md:p-10 relative shadow-soft-pink">
-                <h3 class="text-2xl font-serif text-brand-green mb-3 flex items-center gap-2">Tinggalkan Pesan <i class="fa-solid fa-envelope-open-text text-brand-pink text-sm"></i></h3>
-                <p class="text-gray-600 text-sm mb-6 max-w-[300px] leading-relaxed">Punya pertanyaan atau masukan khusus? Kami siap mendengarkan.</p>
+                <h3 class="text-2xl font-serif text-brand-green mb-6 flex items-center gap-2">Contact Us <i class="fa-solid fa-envelope-open-text text-brand-pink text-sm"></i></h3>
                 
                 @if(session('success'))
                     <div class="bg-brand-green/10 border border-brand-green/20 text-brand-green px-4 py-3 rounded-lg mb-4 text-sm font-medium">

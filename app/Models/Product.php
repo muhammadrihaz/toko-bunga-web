@@ -20,4 +20,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
+
+    public function flowerType()
+    {
+        return $this->belongsTo(FlowerType::class);
+    }
 }

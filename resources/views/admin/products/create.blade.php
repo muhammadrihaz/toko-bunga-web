@@ -33,6 +33,17 @@
         </div>
 
         <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5">Jenis Bunga (Optional)</label>
+            <select name="flower_type_id" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition block bg-gray-50/30">
+                <option value="">Pilih Jenis Bunga...</option>
+                @foreach($flowerTypes as $ft)
+                    <option value="{{ $ft->id }}" {{ old('flower_type_id') == $ft->id ? 'selected' : '' }}>{{ $ft->name }}</option>
+                @endforeach
+            </select>
+            @error('flower_type_id')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
+        </div>
+
+        <div>
             <label class="block text-sm font-medium text-gray-700 mb-1.5">Price (Rp) <span class="text-red-500">*</span></label>
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

@@ -90,7 +90,7 @@
     <header class="container mx-auto px-4 py-4 flex justify-between items-center z-50 bg-white sticky top-0">
       <div class="flex items-center gap-2">
         <a href="{{ url('/') }}" class="flex flex-col">
-          <img src="{{ asset('assets/logo.jpeg') }}" alt="Fania Flower Shop" class="h-12 md:h-16 w-auto object-contain" />
+          <img src="{{ asset('assets/erasebg-transformed.png') }}" alt="Fania Flower Shop" class="h-12 md:h-16 w-auto object-contain" />
         </a>
       </div>
 
@@ -122,7 +122,7 @@
     <footer class="bg-brand-green text-white py-8">
       <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
         <div class="flex flex-col items-center md:items-start">
-          <img src="{{ asset('assets/logo.jpeg') }}" alt="Fania Flower Shop" class="h-10 md:h-12 w-auto object-contain" />
+          <img src="{{ asset('assets/erasebg-transformed.png') }}" alt="Fania Flower Shop" class="h-10 md:h-12 w-auto object-contain" />
         </div>
         <div class="flex flex-wrap justify-center gap-4 md:gap-8 text-sm text-gray-200">
           <a href="{{ url('/') }}" class="hover:text-white transition">Beranda</a>

@@ -20,7 +20,7 @@
     <div class="w-full md:w-1/2 flex flex-col gap-4">
         <div class="w-full h-80 md:h-[500px] overflow-hidden rounded-2xl shadow-soft border border-gray-100">
             @php $mainImagePath = $product->image_path ? Storage::url($product->image_path) : ($product->images->first() ? Storage::url($product->images->first()->image_path) : 'https://placehold.co/800x800'); @endphp
-            <img id="main-product-img" src="{{ $mainImagePath }}" alt="{{ $product->name }}" class="w-full h-full object-cover" />
+            <img id="main-product-img" src="{{ $mainImagePath }}" alt="{{ $product->name }}" class="w-full h-full object-contain bg-gray-50/50" />
         </div>
         
         <div class="flex gap-4 overflow-x-auto no-scrollbar py-2">

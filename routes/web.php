@@ -33,6 +33,7 @@ Route::prefix('admin')->group(function () {
         Route::delete('products/image/{id}', [ProductController::class, 'destroyImage'])->name('products.destroyImage');
         Route::resource('products', ProductController::class);
         Route::resource('categories', CategoryController::class);
+        Route::resource('flower_types', App\Http\Controllers\Admin\FlowerTypeController::class);
         Route::resource('gallery', GalleryController::class);
         Route::resource('messages', MessageController::class);
         Route::resource('settings', SettingController::class);

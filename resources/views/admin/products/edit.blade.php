@@ -39,6 +39,17 @@
         </div>
 
         <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5">Jenis Bunga (Optional)</label>
+            <select name="flower_type_id" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition block bg-gray-50/30">
+                <option value="">Pilih Jenis Bunga...</option>
+                @foreach($flowerTypes as $ft)
+                    <option value="{{ $ft->id }}" {{ old('flower_type_id', $product->flower_type_id) == $ft->id ? 'selected' : '' }}>{{ $ft->name }}</option>
+                @endforeach
+            </select>
+            @error('flower_type_id')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
+        </div>
+
+        <div>
             <label class="block text-sm font-medium text-gray-700 mb-1.5">Price (Rp) <span class="text-red-500">*</span></label>
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -73,9 +84,9 @@
             @if($product->images && $product->images->count() > 0)
                 <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 mb-4">
                     @foreach($product->images as $img)
-                        <div class="relative w-full aspect-square rounded-lg border border-gray-200 overflow-hidden group">
+                        <div id="gallery-img-{{ $img->id }}" class="relative w-full aspect-square rounded-lg border border-gray-200 overflow-hidden group">
                             <img src="{{ Storage::url($img->image_path) }}" class="w-full h-full object-cover">
-                            <button type="button" onclick="confirmGalleryDelete('{{ route('products.destroyImage', $img->id) }}')" class="absolute inset-0 bg-black/60 text-white flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <button type="button" onclick="confirmGalleryDelete('{{ route('products.destroyImage', $img->id) }}', '{{ $img->id }}')" class="absolute inset-0 bg-black/60 text-white flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition">
                                 <i class="fa-solid fa-trash mb-1"></i>
                                 <span class="text-[10px]">Delete</span>
                             </button>
@@ -105,17 +116,32 @@
 
 </div>
 
-<!-- Hidden Delete Form for Gallery Images -->
-<form id="deleteImageForm" method="POST" class="hidden">
-    @csrf
-    @method('DELETE')
-</form>
 <script>
-    function confirmGalleryDelete(url) {
+    async function confirmGalleryDelete(url, imgId) {
         if (confirm('Are you sure you want to delete this gallery image? This action cannot be undone.')) {
-            let form = document.getElementById('deleteImageForm');
-            form.action = url;
-            form.submit();
+            try {
+                const response = await fetch(url, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success) {
+                        const imgElem = document.getElementById('gallery-img-' + imgId);
+                        if (imgElem) {
+                            imgElem.remove();
+                        }
+                    }
+                } else {
+                    alert('Failed to delete image. Please try again.');
+                }
+            } catch (error) {
+                alert('An error occurred. Please try again.');
+            }
         }
     }
 </script>

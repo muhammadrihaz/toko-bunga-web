@@ -29,8 +29,8 @@
     <div class="w-full max-w-md bg-white rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(229,149,160,0.15)] flex flex-col align-center p-8 md:p-10">
         
         <div class="text-center mb-8">
-            <div class="w-16 h-16 bg-brand-green/10 text-brand-green rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fa-solid fa-leaf text-2xl"></i>
+            <div class="w-20 h-20 bg-brand-green/10 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden border-2 border-brand-green/20 shadow-sm">
+                <img src="{{ asset('assets/erasebg-transformed.png') }}" alt="Logo" class="w-full h-full object-cover">
             </div>
             <h1 class="text-2xl font-serif text-brand-green font-semibold">Fania Flower Shop</h1>
             <p class="text-gray-500 text-sm mt-1">Admin Dashboard Login</p>

@@ -35,7 +35,7 @@
     <!-- Sidebar (Desktop) / Drawer (Mobile) -->
     <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'" class="w-64 bg-brand-green text-white flex flex-col h-full border-r border-gray-100/10 shadow-xl fixed md:relative z-50 shrink-0 transition-transform duration-300">
         <div class="h-16 flex items-center justify-center border-b border-white/10 px-4 gap-2">
-            <i class="fa-solid fa-leaf text-brand-pink"></i>
+            <img src="{{ asset('assets/erasebg-transformed.png') }}" alt="Logo" class="h-8 object-contain">
             <span class="font-serif text-lg tracking-wide">Fania Flower Shop</span>
         </div>
         
@@ -47,6 +47,10 @@
             <a href="{{ route('categories.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg {{ request()->routeIs('categories.*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white transition' }}">
                 <i class="fa-solid fa-layer-group w-5 text-center"></i>
                 <span>Categories</span>
+            </a>
+            <a href="{{ route('flower_types.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg {{ request()->routeIs('flower_types.*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white transition' }}">
+                <i class="fa-solid fa-seedling w-5 text-center"></i>
+                <span>Jenis Bunga</span>
             </a>
             <a href="{{ route('products.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg {{ request()->routeIs('products.*') ? 'bg-white/10 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white transition' }}">
                 <i class="fa-solid fa-box-open w-5 text-center"></i>

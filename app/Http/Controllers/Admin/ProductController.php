@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\FlowerType;
 
 class ProductController extends Controller
 {
@@ -18,7 +19,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.products.create', compact('categories'));
+        $flowerTypes = FlowerType::all();
+        return view('admin.products.create', compact('categories', 'flowerTypes'));
     }
 
     public function store(Request $request)
@@ -26,6 +28,7 @@ class ProductController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
+            'flower_type_id' => 'nullable|exists:flower_types,id',
             'price' => 'required|numeric',
             'description' => 'nullable|string',
             'care_instructions' => 'nullable|string',
@@ -58,7 +61,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
-        return view('admin.products.edit', compact('product', 'categories'));
+        $flowerTypes = FlowerType::all();
+        return view('admin.products.edit', compact('product', 'categories', 'flowerTypes'));
     }
 
     public function update(Request $request, Product $product)
@@ -66,6 +70,7 @@ class ProductController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
+            'flower_type_id' => 'nullable|exists:flower_types,id',
             'price' => 'required|numeric',
             'description' => 'nullable|string',
             'care_instructions' => 'nullable|string',
@@ -118,6 +123,6 @@ class ProductController extends Controller
             \Storage::disk('public')->delete($image->image_path);
         }
         $image->delete();
-        return redirect()->back()->with('success', 'Gallery image deleted.');
+        return response()->json(['success' => true, 'message' => 'Gallery image deleted.']);
     }
 }
