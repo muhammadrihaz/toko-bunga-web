@@ -123,18 +123,20 @@
         </div>
 
         <!-- Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-5">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-5 items-start">
             @foreach ($galleries as $index => $item)
             <div class="flex flex-col {{ $index > 1 ? 'hidden md:flex' : 'flex' }}">
-                <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-3 group shadow-soft flex items-center justify-center bg-gray-100">
+                <div class="relative w-full rounded-2xl overflow-hidden mb-3 group shadow-soft">
                     @if($item->image_path)
-                        <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->title }}" class="w-full h-full object-contain group-hover:scale-105 transition duration-500" />
+                        <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->title }}" class="w-full h-auto block group-hover:scale-105 transition duration-500" />
                         <!-- Play icon overlay -->
                         <div class="absolute top-2 left-2 bg-white/80 backdrop-blur-sm w-6 h-6 rounded-full flex items-center justify-center text-[10px] text-gray-700">
                             <i class="fa-solid fa-camera ml-0.5"></i>
                         </div>
                     @else
-                        <i class="fa-solid fa-image text-3xl text-gray-300"></i>
+                        <div class="w-full aspect-[4/3] flex items-center justify-center bg-gray-100">
+                            <i class="fa-solid fa-image text-3xl text-gray-300"></i>
+                        </div>
                     @endif
                 </div>
                 <h5 class="text-center text-gray-700 text-xs md:text-sm font-medium">{{ $item->title }}</h5>

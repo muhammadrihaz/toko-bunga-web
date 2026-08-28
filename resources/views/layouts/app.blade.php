@@ -103,18 +103,29 @@
       </nav>
 
       <div class="flex items-center gap-4">
-        <div class="hidden md:flex items-center gap-2 border rounded-full px-3 py-1 text-sm border-gray-300 cursor-pointer hover:border-gray-400 transition select-none" id="langToggleBtn">
-          <img src="https://flagcdn.com/w20/id.png" alt="Language flag" class="w-4 h-4 rounded-full transition-transform" id="langFlag" />
-          <span id="langDisplayID" class="font-medium text-gray-800 transition-colors">ID</span>
-          <span class="text-gray-300">|</span>
-          <span id="langDisplayEN" class="text-gray-400 hover:text-brand-green transition-colors">EN</span>
-          <i class="fa-solid fa-sync-alt text-xs text-gray-400 hover:rotate-180 transition-transform duration-300"></i>
-        </div>
-        <button class="md:hidden text-2xl text-gray-700 nav-arrow">
+        <div id="google_translate_element" class="hidden md:block"></div>
+        <button id="hamburgerBtn" class="md:hidden text-2xl text-gray-700 nav-arrow">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenu" class="fixed inset-0 bg-white z-[60] flex flex-col pt-6 px-6 transform translate-x-full transition-transform duration-300 md:hidden shadow-2xl">
+      <div class="flex justify-between items-center mb-10">
+        <img src="{{ asset('assets/erasebg-transformed.png') }}" alt="Fania Flower Shop" class="h-10 w-auto object-contain" />
+        <button id="closeMobileMenu" class="text-2xl text-gray-700 p-2">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      <nav class="flex flex-col gap-6 text-lg font-medium">
+        <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'text-brand-pink font-semibold' : 'text-gray-800' }}">Beranda</a>
+        <a href="{{ url('/catalogue') }}" class="{{ request()->is('catalogue*') ? 'text-brand-pink font-semibold' : 'text-gray-800' }}">Catalogue</a>
+        <a href="{{ url('/gallery') }}" class="{{ request()->is('gallery*') ? 'text-brand-pink font-semibold' : 'text-gray-800' }}">Gallery</a>
+        <a href="{{ url('/about') }}" class="{{ request()->is('about*') ? 'text-brand-pink font-semibold' : 'text-gray-800' }}">Tentang Kami</a>
+        <a href="{{ url('/contact') }}" class="{{ request()->is('contact*') ? 'text-brand-pink font-semibold' : 'text-gray-800' }}">Contact</a>
+      </nav>
+    </div>
 
     @yield('content')
 
@@ -139,7 +150,35 @@
       </div>
     </footer>
 
-    <script src="{{ asset('js/lang.js') }}"></script>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'id', 
+          includedLanguages: 'en,id',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+      }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const closeMobileMenuBtn = document.getElementById('closeMobileMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        if (hamburgerBtn && closeMobileMenuBtn && mobileMenu) {
+          hamburgerBtn.addEventListener('click', function() {
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
+          });
+          
+          closeMobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.add('translate-x-full');
+            document.body.style.overflow = '';
+          });
+        }
+      });
+    </script>
     @stack('scripts')
 </body>
 </html>
