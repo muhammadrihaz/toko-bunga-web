@@ -18,7 +18,7 @@ class Setting extends Model
         
         $message = "Halo Fania Flower Shop, saya ingin memesan produk berikut:\n\n";
         $message .= "Nama Produk: " . $productName . "\n";
-        $message .= "Harga: " . $price . "\n\n";
+        $message .= "Harga: Rp " . number_format($price, 0, ',', '.') . "\n\n";
         $message .= "Apakah produk ini masih tersedia?";
 
         return 'https://wa.me/' . $phone . '?text=' . urlencode($message);
