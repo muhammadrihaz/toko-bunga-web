@@ -9,7 +9,7 @@ class FlowerType extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'image_path'];
 
     public function products()
     {

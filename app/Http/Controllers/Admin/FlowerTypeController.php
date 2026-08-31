@@ -23,7 +23,13 @@ class FlowerTypeController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+        
+        if ($request->hasFile('image')) {
+            $data['image_path'] = $request->file('image')->store('flower_types', 'public');
+        }
+        unset($data['image']);
         
         FlowerType::create($data);
         return redirect()->route('flower_types.index')->with('success', 'Jenis Bunga created successfully.');
@@ -38,7 +44,16 @@ class FlowerTypeController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+
+        if ($request->hasFile('image')) {
+            if ($flowerType->image_path) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($flowerType->image_path);
+            }
+            $data['image_path'] = $request->file('image')->store('flower_types', 'public');
+        }
+        unset($data['image']);
 
         $flowerType->update($data);
         return redirect()->route('flower_types.index')->with('success', 'Jenis Bunga updated successfully.');

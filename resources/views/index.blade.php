@@ -3,15 +3,15 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative bg-bg-soft-pink pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
+<section class="relative bg-bg-soft-pink pt-12 pb-16 md:pt-16 md:pb-20 overflow-hidden">
     <div class="container mx-auto px-4 flex flex-col md:flex-row items-center relative z-10">
         <!-- Text Content -->
         <div class="w-full md:w-1/2 flex flex-col items-start text-left mb-10 md:mb-0">
-            <h1 class="text-3xl md:text-5xl font-serif text-brand-green mb-4 leading-tight">
+            <h1 class="text-2xl md:text-4xl font-serif text-brand-green mb-4 leading-tight">
                 {{ \App\Models\Setting::where('key', 'hero_title_1')->value('value') ?? 'Kirim Bunga,' }}<br>
-                <span class="text-brand-pink italic">{{ \App\Models\Setting::where('key', 'hero_title_2')->value('value') ?? 'Sampaikan Perasaan' }}</span> <i class="fa-solid fa-seedling text-brand-pink text-2xl md:text-4xl"></i>
+                <span class="text-brand-pink italic">{{ \App\Models\Setting::where('key', 'hero_title_2')->value('value') ?? 'Sampaikan Perasaan' }}</span> <i class="fa-solid fa-seedling text-brand-pink text-xl md:text-3xl"></i>
             </h1>
-            <p class="text-gray-600 text-base md:text-lg mb-8 max-w-sm mt-4">
+            <p class="text-gray-600 text-sm md:text-base mb-8 mt-4">
                 {{ \App\Models\Setting::where('key', 'hero_subtitle')->value('value') ?? 'Buket segar pilihan untuk setiap momen spesial dalam hidup Anda.' }}
             </p>
             <a href="{{ url('/catalogue') }}" class="inline-flex items-center gap-2 bg-brand-green text-white px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition shadow-md">
@@ -22,8 +22,8 @@
         </div>
         
         <!-- Hero Image -->
-        <div class="w-full md:w-1/2 relative">
-            <div class="relative w-full aspect-square md:aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl">
+        <div class="w-full md:w-1/2 relative flex justify-center">
+            <div class="relative w-4/5 md:w-3/4 aspect-[4/3] rounded-[2rem] overflow-hidden shadow-xl">
                 @php $heroImg = \App\Models\Setting::where('key', 'hero_image_path')->value('value'); @endphp
                 <img src="{{ $heroImg ? Storage::url($heroImg) : 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80' }}" alt="Beautiful Bouquet" class="w-full h-full object-cover origin-center" />
             </div>
@@ -44,13 +44,13 @@
         
         <div class="flex overflow-x-auto no-scrollbar gap-4 md:gap-6 justify-start md:justify-center pb-4">
             <!-- Items -->
-            @foreach ($categories as $f)
-            <div class="flex flex-col items-center gap-3 shrink-0 group cursor-pointer">
-                <div class="w-16 h-16 md:w-20 md:h-20 bg-bg-soft-pink rounded-2xl flex items-center justify-center p-2 group-hover:shadow-soft-pink transition-all">
+            @foreach ($flowerTypes as $f)
+            <div class="flex flex-col items-center gap-3 shrink-0 group cursor-pointer" onclick="window.location.href='{{ url('catalogue?flower_type='.$f->id) }}'">
+                <div class="w-16 h-16 md:w-20 md:h-20 bg-bg-soft-pink rounded-2xl flex items-center justify-center p-2 group-hover:shadow-soft-pink transition-all overflow-hidden">
                     @if($f->image_path)
-                        <img src="{{ Storage::url($f->image_path) }}" class="w-full h-full object-cover rounded-xl" alt="{{ $f->name }}">
+                        <img src="{{ Storage::url($f->image_path) }}" class="w-full h-full object-cover rounded-xl group-hover:scale-110 transition duration-300" alt="{{ $f->name }}">
                     @else
-                        <i class="fa-solid fa-layer-group text-brand-pink text-2xl"></i>
+                        <i class="fa-solid fa-seedling text-brand-pink text-2xl group-hover:scale-110 transition duration-300"></i>
                     @endif
                 </div>
                 <span class="text-xs md:text-sm text-gray-600 font-medium group-hover:text-brand-pink transition">{{ $f->name }}</span>

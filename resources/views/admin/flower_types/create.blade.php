@@ -5,13 +5,19 @@
 @section('content')
 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 max-w-2xl">
     
-    <form action="{{ route('flower_types.store') }}" method="POST" class="flex flex-col gap-5">
+    <form action="{{ route('flower_types.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-5">
         @csrf
         
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1.5">Nama Jenis Bunga <span class="text-red-500">*</span></label>
             <input type="text" name="name" value="{{ old('name') }}" required class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition block bg-gray-50/30" placeholder="e.g. Mawar, Anggrek">
             @error('name')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5">Gambar Jenis Bunga</label>
+            <input type="file" name="image" accept="image/*" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition block bg-gray-50/30">
+            @error('image')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
         </div>
 
         <div class="flex items-center gap-3 mt-4 pt-4 border-t border-gray-100">

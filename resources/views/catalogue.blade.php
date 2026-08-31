@@ -29,20 +29,19 @@
             
             <!-- Filter Pills -->
             <div class="flex flex-col gap-2 mt-2">
-                <!-- Category Pills -->
-                <div class="flex overflow-x-auto no-scrollbar gap-2 pb-2 items-center">
-                    <span class="text-xs text-gray-500 font-medium mr-2 shrink-0"><i class="fa-solid fa-layer-group text-gray-400 mr-1"></i> Kategori:</span>
-                    <a href="{{ request()->fullUrlWithQuery(['category' => null]) }}" class="px-4 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors {{ !request('category') ? 'bg-brand-green text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">Semua</a>
-                    @foreach($categories as $cat)
-                        <a href="{{ request()->fullUrlWithQuery(['category' => $cat->id]) }}" class="px-4 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors {{ request('category') == $cat->id ? 'bg-brand-green text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">{{ $cat->name }}</a>
-                    @endforeach
-                </div>
-                <!-- Flower Type Pills -->
-                <div class="flex overflow-x-auto no-scrollbar gap-2 pb-2 items-center border-t border-gray-50 pt-2">
-                    <span class="text-xs text-gray-500 font-medium mr-2 shrink-0"><i class="fa-solid fa-seedling text-gray-400 mr-1"></i> Jenis Bunga:</span>
+                <div class="flex overflow-x-auto no-scrollbar gap-2 pb-2 items-center border-b border-gray-50 mb-2">
+                    <span class="text-xs text-gray-500 font-medium mr-2 shrink-0">Jenis Bunga:</span>
                     <a href="{{ request()->fullUrlWithQuery(['flower_type' => null]) }}" class="px-4 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors {{ !request('flower_type') ? 'bg-brand-pink text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">Semua</a>
                     @foreach($flowerTypes as $ft)
                         <a href="{{ request()->fullUrlWithQuery(['flower_type' => $ft->id]) }}" class="px-4 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors {{ request('flower_type') == $ft->id ? 'bg-brand-pink text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">{{ $ft->name }}</a>
+                    @endforeach
+                </div>
+                <!-- Category Pills -->
+                <div class="flex overflow-x-auto no-scrollbar gap-2 pb-2 items-center">
+                    <span class="text-xs text-gray-500 font-medium mr-2 shrink-0">Kategori:</span>
+                    <a href="{{ request()->fullUrlWithQuery(['category' => null]) }}" class="px-4 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors {{ !request('category') ? 'bg-brand-green text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">Semua</a>
+                    @foreach($categories as $cat)
+                        <a href="{{ request()->fullUrlWithQuery(['category' => $cat->id]) }}" class="px-4 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors {{ request('category') == $cat->id ? 'bg-brand-green text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">{{ $cat->name }}</a>
                     @endforeach
                 </div>
             </div>

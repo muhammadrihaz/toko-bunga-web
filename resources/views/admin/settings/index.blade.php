@@ -21,7 +21,7 @@
                 <div class="p-5 border border-gray-100 rounded-xl bg-white shadow-sm">
                     <h3 class="text-brand-green font-medium font-serif border-b border-gray-100 pb-3 mb-4"><i class="fa-brands fa-whatsapp mt-1 mr-2"></i>Kontak Utama (Pemesanan)</h3>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1.5">WhatsApp Number <span class="text-red-500">*</span></label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1.5">WhatsApp Number 1 <span class="text-red-500">*</span></label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fa-brands fa-whatsapp text-gray-400"></i>
@@ -29,6 +29,33 @@
                             <input type="text" name="whatsapp_number" value="{{ \App\Models\Setting::where('key', 'whatsapp_number')->value('value') ?? env('WHATSAPP_NUMBER', '6281234567890') }}" required class="w-full pl-10 px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-pink transition block bg-gray-50/30">
                         </div>
                         <p class="text-xs text-gray-500 mt-1.5">Gunakan kode negara tanpa simbol + (misal: 6281234567890).</p>
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1.5">WhatsApp Number 2</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fa-brands fa-whatsapp text-gray-400"></i>
+                            </div>
+                            <input type="text" name="whatsapp_number_2" value="{{ \App\Models\Setting::where('key', 'whatsapp_number_2')->value('value') }}" class="w-full pl-10 px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-pink transition block bg-gray-50/30">
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fa-solid fa-envelope text-gray-400"></i>
+                            </div>
+                            <input type="email" name="email" value="{{ \App\Models\Setting::where('key', 'email')->value('value') ?? 'halo@faniaflowershop.com' }}" class="w-full pl-10 px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-pink transition block bg-gray-50/30">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Settings -->
+                <div class="p-5 border border-gray-100 rounded-xl bg-white shadow-sm">
+                    <h3 class="text-brand-green font-medium font-serif border-b border-gray-100 pb-3 mb-4"><i class="fa-regular fa-images mt-1 mr-2"></i>Pengaturan Galeri</h3>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1.5">Google Drive Link (Lihat Galeri Keseluruhan)</label>
+                        <input type="url" name="google_drive_link" value="{{ \App\Models\Setting::where('key', 'google_drive_link')->value('value') }}" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-pink transition block bg-gray-50/30" placeholder="https://drive.google.com/...">
                     </div>
                 </div>
 
@@ -59,6 +86,10 @@
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1.5"><i class="fa-brands fa-instagram"></i> Instagram URL</label>
                             <input type="text" name="social_instagram" value="{{ \App\Models\Setting::where('key', 'social_instagram')->value('value') ?? '#' }}" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-pink transition block bg-gray-50/30">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1.5"><i class="fa-brands fa-tiktok"></i> TikTok URL</label>
+                            <input type="text" name="social_tiktok" value="{{ \App\Models\Setting::where('key', 'social_tiktok')->value('value') ?? '#' }}" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:border-brand-pink transition block bg-gray-50/30">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1.5"><i class="fa-brands fa-whatsapp"></i> WhatsApp URL</label>

@@ -12,15 +12,11 @@ class PublicController extends Controller
 {
     public function index()
     {
-        $categories = Category::take(8)->get();
+        $flowerTypes = \App\Models\FlowerType::take(8)->get();
         $products = Product::with('category')->where('is_active', true)->latest()->take(5)->get();
         $galleries = Gallery::latest()->take(5)->get();
         
-        $num1 = rand(1, 10);
-        $num2 = rand(1, 10);
-        session(['captcha_answer' => $num1 + $num2]);
-        
-        return view('index', compact('categories', 'products', 'galleries', 'num1', 'num2'));
+        return view('index', compact('flowerTypes', 'products', 'galleries'));
     }
 
     public function catalogue(Request $request)
@@ -77,32 +73,11 @@ class PublicController extends Controller
     public function contact()
     {
         $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
-        $num1 = rand(1, 9);
-        $num2 = rand(1, 9);
-        session(['captcha_answer' => $num1 + $num2]);
-        
-        return view('contact', compact('settings', 'num1', 'num2'));
+        return view('contact', compact('settings'));
     }
 
     public function sendMessage(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'message' => 'required|string',
-            'captcha' => 'required|numeric'
-        ]);
-
-        if ($request->captcha != session('captcha_answer')) {
-            return redirect()->back()->withErrors(['captcha' => 'Jawaban Captcha tidak tepat. Silakan coba lagi.'])->withInput();
-        }
-
-        Message::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'message' => $request->message
-        ]);
-
-        return redirect()->back()->with('success', 'Pesan Anda berhasil terkirim!');
+        return redirect()->back()->with('error', 'Fitur pesan dinonaktifkan.');
     }
 }
