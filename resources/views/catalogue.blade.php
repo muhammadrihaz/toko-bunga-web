@@ -29,13 +29,6 @@
             
             <!-- Filter Pills -->
             <div class="flex flex-col gap-2 mt-2">
-                <div class="flex overflow-x-auto no-scrollbar gap-2 pb-2 items-center border-b border-gray-50 mb-2">
-                    <span class="text-xs text-gray-500 font-medium mr-2 shrink-0">Jenis Bunga:</span>
-                    <a href="{{ request()->fullUrlWithQuery(['flower_type' => null]) }}" class="px-4 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors {{ !request('flower_type') ? 'bg-brand-pink text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">Semua</a>
-                    @foreach($flowerTypes as $ft)
-                        <a href="{{ request()->fullUrlWithQuery(['flower_type' => $ft->id]) }}" class="px-4 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors {{ request('flower_type') == $ft->id ? 'bg-brand-pink text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">{{ $ft->name }}</a>
-                    @endforeach
-                </div>
                 <!-- Category Pills -->
                 <div class="flex overflow-x-auto no-scrollbar gap-2 pb-2 items-center">
                     <span class="text-xs text-gray-500 font-medium mr-2 shrink-0">Kategori:</span>
