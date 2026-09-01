@@ -44,13 +44,11 @@
     @endif
 
     @php $gDriveLink = \App\Models\Setting::where('key', 'google_drive_link')->value('value'); @endphp
-    @if($gDriveLink)
     <div class="mt-16 text-center">
-        <a href="{{ $gDriveLink }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-white text-brand-green border border-brand-green px-8 py-3.5 rounded-full font-semibold hover:bg-brand-green hover:text-white transition shadow-sm hover:shadow-md">
+        <a href="{{ $gDriveLink ?: '#' }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-white text-brand-green border border-brand-green px-8 py-3.5 rounded-full font-semibold hover:bg-brand-green hover:text-white transition shadow-sm hover:shadow-md">
             <i class="fa-brands fa-google-drive text-lg"></i> Lihat Galeri Keseluruhan
         </a>
     </div>
-    @endif
 </section>
 
 <!-- Lightbox Modal -->
