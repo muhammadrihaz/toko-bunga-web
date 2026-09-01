@@ -16,7 +16,9 @@ class GalleryController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(['image' => 'required|image|max:2048']);
+        $request->validate([
+            'image' => 'required|file|mimes:jpeg,png,jpg,gif,svg,mp4,mov,webm,ogg|max:20480'
+        ]);
         
         $path = $request->file('image')->store('gallery', 'public');
         

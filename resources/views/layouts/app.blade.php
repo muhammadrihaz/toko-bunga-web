@@ -134,20 +134,16 @@
     <!-- Footer -->
     <footer class="bg-brand-green text-white py-8">
       <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div class="flex flex-col items-center md:items-start">
-          <img src="{{ asset('assets/erasebg-transformed.png') }}" alt="Fania Flower Shop" class="h-10 md:h-12 w-auto object-contain" />
-        </div>
-        <div class="flex flex-wrap justify-center gap-4 md:gap-8 text-sm text-gray-200">
+        <div class="flex flex-wrap justify-center md:justify-start gap-4 md:gap-8 text-sm text-gray-200 md:flex-grow">
           <a href="{{ url('/') }}" class="hover:text-white transition">Beranda</a>
           <a href="{{ url('/catalogue') }}" class="hover:text-white transition">Catalogue</a>
           <a href="{{ url('/gallery') }}" class="hover:text-white transition">Gallery</a>
           <a href="{{ url('/about') }}" class="hover:text-white transition">Tentang Kami</a>
           <a href="{{ url('/contact') }}" class="hover:text-white transition">Contact</a>
         </div>
-        <div class="flex gap-4">
+        <div class="flex gap-4 justify-center">
           <a href="{{ \App\Models\Setting::where('key', 'social_instagram')->value('value') ?? '#' }}" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white hover:text-brand-green transition"><i class="fa-brands fa-instagram"></i></a>
-          <a href="{{ \App\Models\Setting::where('key', 'social_tiktok')->value('value') ?? '#' }}" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white hover:text-brand-green transition"><i class="fa-brands fa-tiktok"></i></a>
-          <a href="{{ \App\Models\Setting::where('key', 'social_whatsapp')->value('value') ?? '#' }}" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white hover:text-brand-green transition"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="{{ \App\Models\Setting::where('key', 'social_tiktok')->value('value') ?? '#' }}" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white hover:text-brand-green transition"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" fill="currentColor"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a>
           <a href="{{ \App\Models\Setting::where('key', 'social_facebook')->value('value') ?? '#' }}" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full border border-gray-400 flex items-center justify-center hover:bg-white hover:text-brand-green transition"><i class="fa-brands fa-facebook-f"></i></a>
         </div>
       </div>

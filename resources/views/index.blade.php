@@ -9,7 +9,7 @@
         <div class="w-full md:w-1/2 flex flex-col items-start text-left mb-10 md:mb-0">
             <h1 class="text-2xl md:text-4xl font-serif text-brand-green mb-4 leading-tight">
                 {{ \App\Models\Setting::where('key', 'hero_title_1')->value('value') ?? 'Kirim Bunga,' }}<br>
-                <span class="text-brand-pink italic">{{ \App\Models\Setting::where('key', 'hero_title_2')->value('value') ?? 'Sampaikan Perasaan' }}</span> <i class="fa-solid fa-seedling text-brand-pink text-xl md:text-3xl"></i>
+                <span class="text-brand-pink italic text-5xl md:text-7xl">{{ \App\Models\Setting::where('key', 'hero_title_2')->value('value') ?? 'Sampaikan Perasaan' }}</span> <i class="fa-solid fa-seedling text-brand-pink text-4xl md:text-6xl"></i>
             </h1>
             <p class="text-gray-600 text-sm md:text-base mb-8 mt-4">
                 {{ \App\Models\Setting::where('key', 'hero_subtitle')->value('value') ?? 'Buket segar pilihan untuk setiap momen spesial dalam hidup Anda.' }}
@@ -46,9 +46,9 @@
             <!-- Items -->
             @foreach ($flowerTypes as $f)
             <div class="flex flex-col items-center gap-3 shrink-0 group cursor-pointer" onclick="window.location.href='{{ url('catalogue?flower_type='.$f->id) }}'">
-                <div class="w-16 h-16 md:w-20 md:h-20 bg-bg-soft-pink rounded-2xl flex items-center justify-center p-2 group-hover:shadow-soft-pink transition-all overflow-hidden">
+                <div class="w-16 h-16 md:w-20 md:h-20 bg-bg-soft-pink rounded-2xl flex items-center justify-center group-hover:shadow-soft-pink transition-all overflow-hidden relative">
                     @if($f->image_path)
-                        <img src="{{ Storage::url($f->image_path) }}" class="w-full h-full object-cover rounded-xl group-hover:scale-110 transition duration-300" alt="{{ $f->name }}">
+                        <img src="{{ Storage::url($f->image_path) }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" alt="{{ $f->name }}">
                     @else
                         <i class="fa-solid fa-seedling text-brand-pink text-2xl group-hover:scale-110 transition duration-300"></i>
                     @endif
@@ -56,17 +56,12 @@
                 <span class="text-xs md:text-sm text-gray-600 font-medium group-hover:text-brand-pink transition">{{ $f->name }}</span>
             </div>
             @endforeach
-            <!-- Others -->
-            <div class="flex flex-col items-center gap-3 shrink-0 group cursor-pointer">
-                <div class="w-16 h-16 md:w-20 md:h-20 bg-bg-soft-pink rounded-2xl flex items-center justify-center p-4 group-hover:shadow-soft-pink transition-all border border-pink-100">
-                    <div class="grid grid-cols-2 gap-1 w-full h-full">
-                        <div class="border border-brand-pink rounded-sm"></div>
-                        <div class="border border-brand-pink rounded-sm"></div>
-                        <div class="border border-brand-pink rounded-sm"></div>
-                        <div class="border border-brand-pink rounded-sm"></div>
-                    </div>
+            <!-- Others (See More Arrow) -->
+            <div class="flex flex-col items-center gap-3 shrink-0 group cursor-pointer justify-center" onclick="window.location.href='{{ url('catalogue') }}'">
+                <div class="w-16 h-16 md:w-20 md:h-20 bg-bg-soft-green rounded-2xl flex items-center justify-center p-4 transition-all border border-brand-green border-opacity-20 text-brand-green group-hover:shadow-soft-green">
+                    <i class="fa-solid fa-arrow-right text-xl md:text-2xl group-hover:translate-x-1 group-hover:scale-110 transition-transform duration-300"></i>
                 </div>
-                <span class="text-xs md:text-sm text-gray-600 font-medium group-hover:text-brand-pink transition">Lainnya</span>
+                <span class="text-xs md:text-sm text-gray-600 font-medium group-hover:text-brand-green transition">Lihat Lengkap</span>
             </div>
         </div>
     </div>
@@ -86,10 +81,10 @@
             </a>
         </div>
 
-        <!-- Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-5">
-            @foreach ($products as $index => $item)
-            <div class="bg-white rounded-2xl p-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-50 flex flex-col group {{ $index > 1 ? 'hidden md:flex' : 'flex' }} {{ $index > 1 && $index < 4 ? 'hidden md:flex' : 'flex' }}">
+        <!-- Grid / Mobile Slider -->
+        <div class="flex md:grid overflow-x-auto md:overflow-x-visible no-scrollbar snap-x snap-mandatory md:grid-cols-5 gap-4 md:gap-5 pb-4">
+            @foreach ($products->take(6) as $index => $item)
+            <div class="w-[60vw] md:w-auto shrink-0 snap-start bg-white rounded-2xl p-3 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-50 flex flex-col group">
                 <div class="bg-bg-soft-green flex items-center justify-center rounded-xl mb-3 overflow-hidden aspect-[4/3]">
                     @if($item->image_path)
                         <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
@@ -104,6 +99,14 @@
                 </a>
             </div>
             @endforeach
+            
+            <!-- Final arrow for mobile -->
+            <div class="w-[40vw] md:hidden shrink-0 snap-start flex flex-col items-center justify-center gap-3 cursor-pointer group" onclick="window.location.href='{{ url('/catalogue') }}'">
+                <div class="w-16 h-16 bg-bg-soft-green rounded-full flex items-center justify-center group-hover:scale-110 transition border border-brand-green border-opacity-20 text-brand-green">
+                    <i class="fa-solid fa-arrow-right text-xl"></i>
+                </div>
+                <span class="text-sm font-medium text-gray-600 group-hover:text-brand-green transition">Lihat Lengkap</span>
+            </div>
         </div>
     </div>
 </section>
@@ -122,16 +125,24 @@
             </a>
         </div>
 
-        <!-- Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-5 items-start">
-            @foreach ($galleries as $index => $item)
-            <div class="flex flex-col {{ $index > 1 ? 'hidden md:flex' : 'flex' }}">
+        <!-- Grid / Mobile Slider -->
+        <div class="flex md:grid overflow-x-auto md:overflow-x-visible no-scrollbar snap-x snap-mandatory md:grid-cols-5 gap-4 md:gap-5 pb-4 items-start">
+            @foreach ($galleries->take(6) as $index => $item)
+            <div class="w-[50vw] md:w-auto shrink-0 snap-start flex flex-col">
                 <div class="relative w-full rounded-2xl overflow-hidden mb-3 group shadow-soft">
                     @if($item->image_path)
-                        <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->title }}" class="w-full h-auto block group-hover:scale-105 transition duration-500" />
-                        <!-- Play icon overlay -->
+                        @php
+                            $ext = strtolower(pathinfo($item->image_path, PATHINFO_EXTENSION));
+                            $isVideo = in_array($ext, ['mp4', 'webm', 'ogg', 'mov']);
+                        @endphp
+                        @if($isVideo)
+                            <video src="{{ Storage::url($item->image_path) }}" class="w-full h-auto block group-hover:scale-105 transition duration-500"></video>
+                        @else
+                            <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->title }}" class="w-full h-auto block group-hover:scale-105 transition duration-500" />
+                        @endif
+                        <!-- Media icon overlay -->
                         <div class="absolute top-2 left-2 bg-white/80 backdrop-blur-sm w-6 h-6 rounded-full flex items-center justify-center text-[10px] text-gray-700">
-                            <i class="fa-solid fa-camera ml-0.5"></i>
+                            <i class="fa-solid {{ $isVideo ? 'fa-video' : 'fa-camera' }} ml-0.5"></i>
                         </div>
                     @else
                         <div class="w-full aspect-[4/3] flex items-center justify-center bg-gray-100">
@@ -142,6 +153,14 @@
                 <h5 class="text-center text-gray-700 text-xs md:text-sm font-medium">{{ $item->title }}</h5>
             </div>
             @endforeach
+
+            <!-- Final arrow for mobile -->
+            <div class="w-[40vw] md:hidden shrink-0 snap-start flex flex-col items-center justify-center gap-3 h-full min-h-[150px] cursor-pointer group" onclick="window.location.href='{{ url('/gallery') }}'">
+                <div class="w-16 h-16 bg-bg-soft-green rounded-full flex items-center justify-center group-hover:scale-110 transition border border-brand-green border-opacity-20 text-brand-green">
+                    <i class="fa-solid fa-arrow-right text-xl"></i>
+                </div>
+                <span class="text-sm font-medium text-gray-600 group-hover:text-brand-green transition">Lihat Lengkap</span>
+            </div>
         </div>
     </div>
 </section>
@@ -158,21 +177,21 @@
                 <div class="relative z-10 w-full flex flex-col gap-4 mt-2">
                     <div class="flex items-start gap-4 bg-white/60 p-4 rounded-xl border border-white/40 shadow-[0_4px_10px_rgba(0,0,0,0.02)]">
                         <div class="w-10 h-10 rounded-full bg-brand-green text-white flex items-center justify-center shrink-0">
-                            <i class="fa-solid fa-map-marker-alt text-sm"></i>
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
                         </div>
                         <div>
-                            <h4 class="font-semibold text-gray-800 text-sm mb-1">Alamat</h4>
-                            <p class="text-xs text-gray-600 leading-relaxed">{!! nl2br(e(\App\Models\Setting::where('key', 'company_address')->value('value') ?? "Jl. Bunga Melati No. 42,\nKebayoran Baru, Jakarta Selatan")) !!}</p>
+                            <h4 class="font-semibold text-gray-800 text-sm mb-1">WhatsApp 1</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">+{{ \App\Models\Setting::where('key', 'whatsapp_number')->value('value') ?? '6281234567890' }}</p>
                         </div>
                     </div>
 
                     <div class="flex items-start gap-4 bg-white/60 p-4 rounded-xl border border-white/40 shadow-[0_4px_10px_rgba(0,0,0,0.02)]">
                         <div class="w-10 h-10 rounded-full bg-brand-green text-white flex items-center justify-center shrink-0">
-                            <i class="fa-solid fa-phone text-sm"></i>
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
                         </div>
                         <div>
-                            <h4 class="font-semibold text-gray-800 text-sm mb-1">Telepon / WhatsApp</h4>
-                            <p class="text-xs text-gray-600 leading-relaxed">+{{ \App\Models\Setting::where('key', 'whatsapp_number')->value('value') ?? '6281234567890' }}</p>
+                            <h4 class="font-semibold text-gray-800 text-sm mb-1">WhatsApp 2</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">+{{ \App\Models\Setting::where('key', 'whatsapp_number_2')->value('value') ?? '6281234567890' }}</p>
                         </div>
                     </div>
 

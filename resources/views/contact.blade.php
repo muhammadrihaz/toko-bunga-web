@@ -11,7 +11,6 @@
 </div>
 
 <section class="container mx-auto px-4 py-16">
-<section class="container mx-auto px-4 py-16">
     <div class="flex justify-center">
         <!-- Info Khusus -->
         <div class="w-full md:w-1/2">
