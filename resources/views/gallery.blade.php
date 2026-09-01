@@ -12,20 +12,20 @@
 
 <section class="container mx-auto px-4 py-16">
     @if($galleries->count() > 0)
-    <div class="columns-2 md:columns-4 lg:columns-6 xl:columns-7 gap-4">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
         @foreach($galleries as $gallery)
         @php
             $ext = strtolower(pathinfo($gallery->image_path, PATHINFO_EXTENSION));
             $isVideo = in_array($ext, ['mp4', 'webm', 'ogg', 'mov']);
         @endphp
-        <div class="rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] cursor-pointer group relative bg-gray-100 break-inside-avoid mb-4" onclick="openLightbox('{{ Storage::url($gallery->image_path) }}', {{ $isVideo ? 'true' : 'false' }}, '{{ $gallery->title ?? '' }}')">
+        <div class="rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] cursor-pointer group relative bg-gray-100 aspect-square" onclick="openLightbox('{{ Storage::url($gallery->image_path) }}', {{ $isVideo ? 'true' : 'false' }}, '{{ $gallery->title ?? '' }}')">
             @if($isVideo)
-                <video src="{{ Storage::url($gallery->image_path) }}" class="w-full h-auto block group-hover:scale-105 transition duration-500"></video>
+                <video src="{{ Storage::url($gallery->image_path) }}" class="w-full h-full object-cover block group-hover:scale-105 transition duration-500"></video>
                 <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition">
                     <i class="fa-solid fa-play text-white text-3xl opacity-80 shadow-sm"></i>
                 </div>
             @else
-                <img src="{{ Storage::url($gallery->image_path) }}" class="w-full h-auto block group-hover:scale-105 transition duration-500" alt="{{ $gallery->title ?? 'Gallery Image' }}" />
+                <img src="{{ Storage::url($gallery->image_path) }}" class="w-full h-full object-cover block group-hover:scale-105 transition duration-500" alt="{{ $gallery->title ?? 'Gallery Image' }}" />
             @endif
             
             @if($gallery->title)
