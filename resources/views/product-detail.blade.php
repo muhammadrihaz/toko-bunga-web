@@ -1,6 +1,15 @@
 @extends('layouts.app')
 @section('title', $product->name . ' - Fania Flower Shop')
 
+@php
+    $imagePath = $product->image_path ?: ($product->images->first() ? $product->images->first()->image_path : null);
+    $imageUrl = $imagePath ? asset(Storage::url($imagePath)) : asset('assets/logo.jpeg');
+@endphp
+
+@section('og_title', $product->name . ' - Fania Flower Shop')
+@section('og_description', strip_tags($product->description ?? 'Beli ' . $product->name . ' di Fania Flower Shop.'))
+@section('og_image', $imageUrl)
+
 @section('content')
 <!-- Breadcrumb -->
 <div class="bg-gray-50 border-b border-gray-100">
@@ -53,10 +62,8 @@
         <!-- Whatsapp action -->
         @php
             $productUrl = url('/product-detail?id=' . $product->id);
-            $imagePath = $product->image_path ?: ($product->images->first() ? $product->images->first()->image_path : null);
-            $imageUrl = $imagePath ? asset(Storage::url($imagePath)) : null;
         @endphp
-        <a href="{{ \App\Models\Setting::getWhatsAppUrl($product->name, $product->price, $productUrl, $imageUrl) }}" target="_blank" rel="noopener noreferrer" class="w-full bg-brand-green text-white py-3.5 rounded-full text-sm font-medium hover:bg-opacity-90 hover:shadow-glow-green transition shadow-md flex items-center justify-center gap-2 mb-8 mt-2">
+        <a href="{{ \App\Models\Setting::getWhatsAppUrl($product->name, $product->price, $productUrl) }}" target="_blank" rel="noopener noreferrer" class="w-full bg-brand-green text-white py-3.5 rounded-full text-sm font-medium hover:bg-opacity-90 hover:shadow-glow-green transition shadow-md flex items-center justify-center gap-2 mb-8 mt-2">
         <i class="fa-brands fa-whatsapp text-lg"></i> Pesan Langsung via WhatsApp
         </a>
 

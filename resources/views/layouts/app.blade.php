@@ -8,6 +8,13 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/logo.jpeg') }}" type="image/jpeg">
 
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="@yield('og_title', 'Fania Flower Shop')" />
+    <meta property="og:description" content="@yield('og_description', 'Toko Bunga Fania Flower Shop')" />
+    <meta property="og:image" content="@yield('og_image', asset('assets/logo.jpeg'))" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:type" content="website" />
+
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>

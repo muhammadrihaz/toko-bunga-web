@@ -11,7 +11,7 @@ class Setting extends Model
 
     protected $guarded = [];
 
-    public static function getWhatsAppUrl($productName, $price, $productUrl = null, $imageUrl = null)
+    public static function getWhatsAppUrl($productName, $price, $productUrl = null)
     {
         // Ambil nomor dari setting DB atau gunakan default dari .env/fallback
         $phone = self::where('key', 'whatsapp_number')->value('value') ?? env('WHATSAPP_NUMBER', '6281234567890');
@@ -22,9 +22,6 @@ class Setting extends Model
         
         if ($productUrl) {
             $message .= "Link Produk: " . $productUrl . "\n";
-        }
-        if ($imageUrl) {
-            $message .= "Gambar: " . $imageUrl . "\n";
         }
         
         $message .= "\nApakah produk ini masih tersedia?";
