@@ -201,7 +201,7 @@
                         </div>
                         <div>
                             <h4 class="font-semibold text-gray-800 text-sm mb-1">Email</h4>
-                            <p class="text-xs text-gray-600 leading-relaxed">halo@faniaflowershop.com</p>
+                            <p class="text-xs text-gray-600 leading-relaxed">{{ \App\Models\Setting::where('key', 'email')->value('value') ?? 'halo@faniaflowershop.com' }}</p>
                         </div>
                     </div>
                 </div>
