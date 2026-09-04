@@ -61,7 +61,7 @@
 
         <!-- Whatsapp action -->
         @php
-            $productUrl = url('/product-detail?id=' . $product->id);
+            $productUrl = url('/product-detail?id=' . $product->id . '&ref=' . time());
         @endphp
         <a href="{{ \App\Models\Setting::getWhatsAppUrl($product->name, $product->price, $productUrl) }}" target="_blank" rel="noopener noreferrer" class="w-full bg-brand-green text-white py-3.5 rounded-full text-sm font-medium hover:bg-opacity-90 hover:shadow-glow-green transition shadow-md flex items-center justify-center gap-2 mb-8 mt-2">
         <i class="fa-brands fa-whatsapp text-lg"></i> Pesan Langsung via WhatsApp
