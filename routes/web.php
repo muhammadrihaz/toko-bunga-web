@@ -14,6 +14,7 @@ use App\Http\Controllers\PublicController;
 Route::get('/', [PublicController::class, 'index']);
 Route::get('/catalogue', [PublicController::class, 'catalogue']);
 Route::get('/gallery', [PublicController::class, 'gallery']);
+Route::get('/jenis-bunga', [PublicController::class, 'jenisBunga']);
 Route::get('/about', [PublicController::class, 'about']);
 Route::get('/contact', [PublicController::class, 'contact']);
 Route::get('/product-detail', [PublicController::class, 'productDetail']);

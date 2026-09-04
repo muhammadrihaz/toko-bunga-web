@@ -92,7 +92,8 @@
     <!-- Header / Navbar -->
     <header class="container mx-auto px-4 py-4 flex justify-between items-center z-50 bg-white sticky top-0">
       <div class="flex items-center gap-2">
-        <a href="{{ url('/') }}" class="flex flex-col">
+        <a href="{{ url('/') }}" class="flex items-center gap-3">
+          <img src="{{ asset('assets/erasebg-transformed.png') }}" alt="Fania Flower Shop Logo" class="h-10 md:h-12 w-auto object-contain" />
           <span class="font-serif text-xl md:text-2xl font-bold text-brand-green">Fania Flower Shop</span>
         </a>
       </div>

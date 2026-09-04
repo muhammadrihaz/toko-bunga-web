@@ -64,6 +64,12 @@ class PublicController extends Controller
         return view('gallery', compact('galleries'));
     }
 
+    public function jenisBunga()
+    {
+        $flowerTypes = \App\Models\FlowerType::all();
+        return view('jenis-bunga', compact('flowerTypes'));
+    }
+
     public function about()
     {
         $settings = \App\Models\Setting::pluck('value', 'key')->toArray();

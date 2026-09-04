@@ -10,54 +10,80 @@
     </div>
 </div>
 
-<section class="container mx-auto px-4 py-16">
-    <div class="flex justify-center">
-        <!-- Info Khusus -->
-        <div class="w-full md:w-1/2">
-            <div class="bg-white p-8 rounded-2xl shadow-soft border border-gray-100 text-center">
-                <h3 class="text-2xl font-serif text-brand-green mb-8">Informasi Kontak</h3>
+<section class="py-12 pb-24">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row gap-6">
+            
+            <!-- Contact Form Card -->
+            <div class="w-full md:w-1/2 bg-bg-soft-pink rounded-[2rem] p-8 md:p-10 relative shadow-soft-pink">
+                <h3 class="text-2xl font-serif text-brand-green mb-6 flex items-center gap-2">Hubungi Kami <i class="fa-solid fa-envelope-open-text text-brand-pink text-sm"></i></h3>
                 
-                <div class="flex flex-col items-center gap-2 mb-6">
-                    <div class="w-12 h-12 rounded-full bg-bg-soft-green text-brand-green flex items-center justify-center mb-2">
-                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                <div class="relative z-10 w-full flex flex-col gap-4 mt-2">
+                    <div class="flex items-start gap-4 bg-white/60 p-4 rounded-xl border border-white/40 shadow-[0_4px_10px_rgba(0,0,0,0.02)]">
+                        <div class="w-10 h-10 rounded-full bg-brand-green text-white flex items-center justify-center shrink-0">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 text-sm mb-1">WhatsApp 1</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">+{{ $settings['whatsapp_number'] ?? '6281234567890' }}</p>
+                        </div>
                     </div>
-                    <h4 class="font-medium text-gray-800 text-lg">WhatsApp</h4>
-                    <p class="text-gray-600 text-sm">CS 1: +{{ $settings['whatsapp_number'] ?? '6281234567890' }}</p>
+
                     @if(!empty($settings['whatsapp_number_2']))
-                    <p class="text-gray-600 text-sm">CS 2: +{{ $settings['whatsapp_number_2'] }}</p>
+                    <div class="flex items-start gap-4 bg-white/60 p-4 rounded-xl border border-white/40 shadow-[0_4px_10px_rgba(0,0,0,0.02)]">
+                        <div class="w-10 h-10 rounded-full bg-brand-green text-white flex items-center justify-center shrink-0">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 text-sm mb-1">WhatsApp 2</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">+{{ $settings['whatsapp_number_2'] }}</p>
+                        </div>
+                    </div>
                     @endif
+
+                    <div class="flex items-start gap-4 bg-white/60 p-4 rounded-xl border border-white/40 shadow-[0_4px_10px_rgba(0,0,0,0.02)]">
+                        <div class="w-10 h-10 rounded-full bg-brand-green text-white flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-envelope text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 text-sm mb-1">Email</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">{{ $settings['email'] ?? 'halo@faniaflowershop.com' }}</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="flex flex-col items-center gap-2 mb-8">
-                    <div class="w-12 h-12 rounded-full bg-bg-soft-green text-brand-green flex items-center justify-center mb-2">
-                        <i class="fa-solid fa-envelope text-xl"></i>
-                    </div>
-                    <h4 class="font-medium text-gray-800 text-lg">Email</h4>
-                    <p class="text-gray-600 text-sm">{{ $settings['email'] ?? 'halo@faniaflowershop.com' }}</p>
-                </div>
+                <!-- Decorative flower outline -->
+                <img src="https://images.unsplash.com/photo-1597826336103-f661aee093f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="absolute bottom-0 right-0 w-48 opacity-10 mix-blend-multiply filter grayscale rounded-tl-[100px] pointer-events-none z-0" alt="" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);" />
+            </div>
+
+            <!-- Alamat Kami Card -->
+            <div class="w-full md:w-1/2 bg-bg-soft-green rounded-[2rem] p-8 md:p-10 relative overflow-hidden shadow-soft flex flex-col">
+                <h3 class="text-2xl font-serif text-brand-green mb-3 flex items-center gap-2">Alamat Kami <i class="fa-solid fa-leaf text-brand-green opacity-50 text-sm"></i></h3>
+                <p class="text-gray-600 text-sm mb-5 leading-relaxed font-medium">
+                    {!! nl2br(e($settings['company_address'] ?? "Jl. Bunga Indah No. 10\nKebayoran Baru, Jakarta Selatan 12120")) !!}
+                </p>
                 
-                <div class="border-t border-gray-100 pt-8 mt-2">
-                    <h4 class="font-medium text-gray-800 text-lg mb-4"><i class="fa-solid fa-map-location-dot text-brand-green mr-2"></i>Peta & Lokasi</h4>
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">{!! nl2br(e($settings['company_address'] ?? "Jl. Bunga Melati No. 42,\nKebayoran Baru, Jakarta Selatan")) !!}</p>
-                    
-                    @php
-                        $rawMap = $settings['company_map_embed'] ?? '';
-                        $mapUrl = '';
-                        if (str_contains($rawMap, 'src="')) {
-                            preg_match('/src="([^"]+)"/', $rawMap, $match);
-                            $mapUrl = $match[1] ?? '';
-                        } else {
-                            $mapUrl = $rawMap;
-                        }
-                        if (empty($mapUrl)) {
-                            $mapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126920.2403271501!2d106.75936301323985!3d-6.229740131114092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f8e853d2e38d%3A0x301576d14feb9e0!2sJakarta%20Selatan%2C%20Kota%20Jakarta%20Selatan%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid";
+                <!-- Map Mockup -->
+                <div class="w-full flex-1 min-h-[200px] bg-gray-200 rounded-xl overflow-hidden relative border border-gray-100 shadow-inner">
+                    @php 
+                        $embedMap = $settings['company_map_embed'] ?? ''; 
+                        if ($embedMap && preg_match('/src="([^"]+)"/', $embedMap, $matches)) {
+                            $embedMap = $matches[1];
                         }
                     @endphp
-                    <div class="rounded-xl overflow-hidden shadow-inner border border-gray-200">
-                        <iframe src="{{ $mapUrl }}" class="w-full h-72" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
+                    @if($embedMap)
+                        <iframe src="{{ $embedMap }}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    @else
+                        <!-- Pin Fallback (Empty Map) -->
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 bg-white px-3 py-1.5 rounded-full shadow-lg z-10 w-max max-w-full">
+                            <i class="fa-solid fa-location-dot text-brand-pink"></i>
+                            <span class="text-xs font-semibold text-gray-800">{{ $settings['company_pin_label'] ?? 'Fania Flower Shop' }}</span>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Map Location" class="w-full h-full object-cover opacity-60" />
+                    @endif
                 </div>
             </div>
+
         </div>
     </div>
 </section>
