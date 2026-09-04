@@ -57,7 +57,7 @@
             </div>
             @endforeach
             <!-- Others (See More Arrow) -->
-            <div class="flex flex-col items-center gap-3 shrink-0 group cursor-pointer justify-center" onclick="window.location.href='{{ url('catalogue') }}'">
+            <div class="flex flex-col items-center gap-3 shrink-0 group cursor-pointer justify-center" onclick="window.location.href='{{ url('jenis-bunga') }}'">
                 <div class="w-16 h-16 md:w-20 md:h-20 bg-bg-soft-green rounded-2xl flex items-center justify-center p-4 transition-all border border-brand-green border-opacity-20 text-brand-green group-hover:shadow-soft-green">
                     <i class="fa-solid fa-arrow-right text-xl md:text-2xl group-hover:translate-x-1 group-hover:scale-110 transition-transform duration-300"></i>
                 </div>
