@@ -18,8 +18,8 @@
             <img src="{{ Storage::url($type->image_path) }}" class="w-full h-full object-cover block group-hover:scale-105 transition duration-500" alt="{{ $type->name ?? 'Jenis Bunga' }}" />
             
             @if($type->name)
-            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 opacity-0 group-hover:opacity-100 transition duration-300">
-                <p class="text-white font-medium text-xs md:text-sm translate-y-2 group-hover:translate-y-0 transition truncate">{{ $type->name }}</p>
+            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-md text-[10px] font-medium text-brand-green border border-white shadow-sm">
+                {{ $type->name }}
             </div>
             @endif
         </a>
